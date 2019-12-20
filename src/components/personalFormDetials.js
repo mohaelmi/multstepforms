@@ -5,7 +5,7 @@ import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 
 
-class UserDeteilsForm extends Component {
+class PersonalFormDetials extends Component {
     constructor(props) {
         super(props)
 
@@ -21,29 +21,23 @@ class UserDeteilsForm extends Component {
     contin = e => {
         e.preventDefault()
         this.props.nextStep();
-        console.log(this.props.values.firstname)
-        console.log(this.props.values.lastname)
-        console.log(this.props.values.email)
-        // console.log(this.props.values)
+        // console.log(this.props.values.firstname)
+        // console.log(this.props.values.lastname)
+        // console.log(this.props.values.email)
         
     }
 
-    
-    // handleChange(e) {
-    //     const { firstname, lastname, email } = this.state
-    //     const userform = new UserForm()
-    //     userform.gifToState(firstname, lastname, email)
+    prevStep  = (e) => {
+        e.preventDefault()
+        this.props.prevStep();
+    }
 
-       
-    // //    UserForm.props.setState({ [e.target.name]: e.target.value })
-    //     // this.props.handleChange()
-    // }
+    
+    
 
     render() {
-    //    const { firstname, lastname, email } = this.state
        const { values, handleChange } = this.props 
  
-    //    console.log(firstname)
         return (
             <MuiThemeProvider>
                 <React.Fragment>
@@ -51,30 +45,35 @@ class UserDeteilsForm extends Component {
               <div style = { style.textStyle }>      
                 <TextField
                     type = "text"
-                    label="first name"
-                    name = "firstname"
+                    label="occupation"
+                    name = "occupation"
                     onChange = {handleChange}
-                    defaultValue = { values.firstname }
+                    defaultValue = { values.occupation }
                 />
                 <br/>
                  <TextField
-                    label="last name"
-                    name = "lastname"
+                    label="city"
+                    name = "city"
                     onChange = {handleChange}
-                    defaultValue = {values.lastname}
+                    defaultValue = {values.city}
                 />
                 <br/>
                  <TextField
-                    label="email"
-                    name = "email"
+                    label="bio"
+                    name = "bio"
                     onChange = {handleChange}
-                    defaultValue = { values.email }
+                    defaultValue = { values.bio }
                 />
                 <br/>
                 <RaisedButton
                 label = "continue"
                 primary = {true}
                 onClick = { this.contin }
+                />
+                 <RaisedButton
+                label = "back"
+                primary = {false}
+                onClick = { this.prevStep }
                 />
                 </div>
                 </React.Fragment>
@@ -90,4 +89,4 @@ const style = {
     }
 }
 
-export default UserDeteilsForm
+export default PersonalFormDetials

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import UserDeteilsForm from './UserDeteilsForm'
+import PersonalFormDetials from './personalFormDetials'
+import Confirm from './confirm';
 
 class UserForm extends Component {
     constructor(props) {
@@ -16,6 +18,7 @@ class UserForm extends Component {
         }
     }
 
+ 
     nextStep = () =>{
         const { step } = this.state
         this.setState({ step: step + 1 })
@@ -26,19 +29,33 @@ class UserForm extends Component {
         this.setState({ step: step - 1 })
     }
 
-    handlChange  = input => e => {
-        this.setState({ [input]: e.target.value  })
+    handleChange = (e) => {
+        e.preventDefault()
+        this.setState({ [e.target.name]: e.target.value })
     }
+    
 
     render() {
-        const { nextStep } = this.state
+        const { step } = this.state
         const { firstname, lastname, email, occupation, city, bio } = this.state
         const values = { firstname, lastname, email, occupation, city, bio }
-        return (
-            <div>
-                <UserDeteilsForm  nextStep={ nextStep }  handlChange = {this.handlChange} values = {values}  />
-            </div>
-        )
+        switch (step) {
+            case  1:
+            return (
+            <UserDeteilsForm  nextStep={ this.nextStep }  values = {values}  handleChange = {(e)=> this.handleChange(e) } />
+            )
+          
+            case  2:
+            return (
+                    <PersonalFormDetials   nextStep={ this.nextStep } prevStep = {this.prevStep} values = {values}  handleChange = {(e)=> this.handleChange(e) } />
+            )
+            case  3:
+
+            return (
+                <Confirm  prevStep = { this.prevStep } />
+            )
+        }
+
     }
 }
 
