@@ -10,44 +10,58 @@ class UserDeteilsForm extends Component {
         super(props)
 
         this.state = {
-           
+           newUser: {
+           firstname: '',
+           lastname: '',
+           email: ''
+          }
+
         }
 
     }
 
-   
+ 
     
     
     contin = e => {
         e.preventDefault()
-        this.props.nextStep();
-        console.log(this.props.values.firstname)
-        console.log(this.props.values.lastname)
-        console.log(this.props.values.email)
-        // console.log(this.props.values)
+        const { firstname, lastname, email } = this.props.values
+        // this.props.nextStep();
+        // posting data
+        // this.setState({ firstname, lastname, email })
+        const newUser = {
+            firstname,
+            lastname,
+            email
+        }
+            
+        console.log(newUser)
+            fetch('/members',  {
+                method: 'POST',
+                headers: {
+                'content-type': 'application/json'
+                },
+                body:   JSON.stringify(newUser)
+                
+            })
+              .then(res => res.json())
+              .then(result =>  this.setState({ msg: result }))
+              .catch(err => console.log(err))
+        
+        // console.log(this.props.values.firstname)
+        // console.log(this.props.values.lastname)
+        // console.log(this.props.values.email)
         
     }
 
     
-    // handleChange(e) {
-    //     const { firstname, lastname, email } = this.state
-    //     const userform = new UserForm()
-    //     userform.gifToState(firstname, lastname, email)
-
-       
-    // //    UserForm.props.setState({ [e.target.name]: e.target.value })
-    //     // this.props.handleChange()
-    // }
 
     render() {
-    //    const { firstname, lastname, email } = this.state
        const { values, handleChange } = this.props 
- 
-    //    console.log(firstname)
         return (
             <MuiThemeProvider>
                 <React.Fragment>
-                    <AppBar  title = "Enter User Detiels" />
+               
               <div style = { style.textStyle }>      
                 <TextField
                     type = "text"

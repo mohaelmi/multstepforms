@@ -15,15 +15,9 @@ class PersonalFormDetials extends Component {
 
     }
 
-   
-    
-    
     contin = e => {
         e.preventDefault()
         this.props.nextStep();
-        // console.log(this.props.values.firstname)
-        // console.log(this.props.values.lastname)
-        // console.log(this.props.values.email)
         
     }
 
@@ -31,9 +25,6 @@ class PersonalFormDetials extends Component {
         e.preventDefault()
         this.props.prevStep();
     }
-
-    
-    
 
     render() {
        const { values, handleChange } = this.props 
