@@ -25,28 +25,10 @@ class UserDeteilsForm extends Component {
     
     contin = e => {
         e.preventDefault()
-        const { firstname, lastname, email } = this.props.values
-        // this.props.nextStep();
-        // posting data
-        // this.setState({ firstname, lastname, email })
-        const newUser = {
-            firstname,
-            lastname,
-            email
-        }
+        this.props.nextStep();
+       
             
-        console.log(newUser)
-            fetch('/members',  {
-                method: 'POST',
-                headers: {
-                'content-type': 'application/json'
-                },
-                body:   JSON.stringify(newUser)
-                
-            })
-              .then(res => res.json())
-              .then(result =>  this.setState({ msg: result }))
-              .catch(err => console.log(err))
+       
         
         // console.log(this.props.values.firstname)
         // console.log(this.props.values.lastname)

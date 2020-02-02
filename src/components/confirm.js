@@ -3,6 +3,8 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AppBar from "material-ui/AppBar";
 import { List, ListItem } from "material-ui/List";
 import RaisedButton from "material-ui/RaisedButton";
+import uuid from 'uuid'
+// const uuid = require('uuid');
 
 
 class Confirm extends Component {
@@ -10,14 +12,29 @@ class Confirm extends Component {
         super(props)
 
         this.state = {
-           
+           msg: null
         }
 
     }
 
-    contin = e => {
+    confirm = e => {
         e.preventDefault()
-        //passing data to the backend or api
+        // passing data to the backend or api
+         console.log(this.props.values)
+         this.props.values.id = uuid();
+          
+            fetch('/members',  {
+                method: 'POST',
+                headers: {
+                'content-type': 'application/json'
+                },
+                body:   JSON.stringify(this.props.values)
+                
+            })
+              .then(res => res.json())
+              .then(result =>  this.setState({ msg: result }))
+              .catch(err => console.log(err))
+
         this.props.nextStep();
         
     }
@@ -30,7 +47,7 @@ class Confirm extends Component {
     render() {
        const { firstname, lastname, email, occupation, city, bio } = this.props.values
 
- 
+        console.log( this.state.msg )
         return (
             <MuiThemeProvider>
                 <React.Fragment>
@@ -64,9 +81,9 @@ class Confirm extends Component {
                 </List>
                 <br/>
                 <RaisedButton
-                label = "continue"
+                label = "Confirm"
                 primary = {true}
-                onClick = { this.contin }
+                onClick = { this.confirm }
                 />
                  <RaisedButton
                 label = "back"

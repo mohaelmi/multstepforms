@@ -27,6 +27,9 @@ class Displayinfo extends Component {
                      <li> first name: { member.firstname } </li>
                      <li> last name: { member.lastname } </li>
                      <li> email: { member.email } </li>
+                     <li> occupation: { member.occupation } </li>
+                     <li> city: { member.city } </li>
+                     <li> Bio: { member.bio } </li>
                  </ul>  
                )) }
            </div> 

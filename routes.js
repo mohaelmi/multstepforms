@@ -23,10 +23,13 @@ router.get('/', function (req, res) {
            id: req.body.id,
            firstname: req.body.firstname,
            lastname: req.body.lastname,
-           email: req.body.email
+           email: req.body.email,
+           occupation: req.body.occupation,
+           city: req.body.city,
+           bio: req.body.bio
        }
    
-       if(!newUser.firstname || !newUser.lastname || !newUser.email){
+       if(!newUser.firstname || !newUser.lastname || !newUser.email || !newUser.occupation || !newUser.city || !newUser.bio ){
            return res.status(400).json('please fill correctly')
        }
        members.push(newUser)
